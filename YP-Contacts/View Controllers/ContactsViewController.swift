@@ -1,12 +1,12 @@
 import UIKit
 
-class ContactsViewController: UIViewController {
+final class ContactsViewController: UIViewController {
     
-    var tableView = UITableView()
-    var cellModels: [Contact] = []
-    let service = ContactsServiceImpl()
+    private var tableView = UITableView()
+    private var cellModels: [Contact] = []
+    private let service = ContactsServiceImpl()
     static let shared = ContactsViewController()
-    var lastSortWay: SortWay = .nameFromStart
+    private var lastSortWay: SortWay = .nameFromStart
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +16,7 @@ class ContactsViewController: UIViewController {
         loadData()
     }
     
-    func createNavigationBar() {
+    private  func createNavigationBar() {
         title = "Контакты"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.barStyle = .black
@@ -45,7 +45,7 @@ class ContactsViewController: UIViewController {
         ]
     }
     
-    @objc func sortButtonTapped() {
+    @objc private func sortButtonTapped() {
         let sortVC = SortViewController()
         sortVC.delegate = self
         sortVC.sortWay = self.lastSortWay
@@ -54,11 +54,11 @@ class ContactsViewController: UIViewController {
         }
     }
     
-    @objc func filterButtonTapped() {
+    @objc private func filterButtonTapped() {
         self.present(FilterViewController(), animated: true)
     }
     
-    func createTable() {
+    private func createTable() {
         tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(ContactCell.self, forCellReuseIdentifier: ContactCell.identifier)
         tableView.delegate = self
@@ -68,7 +68,7 @@ class ContactsViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    func loadData() {
+    private func loadData() {
         service.loadContacts { [weak self] contacts in
             guard let self = self else { return }
             self.cellModels = contacts

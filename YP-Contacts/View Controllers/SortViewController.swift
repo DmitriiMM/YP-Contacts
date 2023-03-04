@@ -14,11 +14,11 @@ protocol SortViewControllerDelegate: AnyObject {
     func reloadTableView()
 }
 
-class SortViewController: UIViewController {
-    let tableView = UITableView()
-    let sortCells = ["По имени (А-Я / A-Z)", "По имени (Я-А / Z-A)", "По фамилии (А-Я / A-Z)", "По фамилии (Я-А / Z-A)"]
+final class SortViewController: UIViewController {
+    private let tableView = UITableView()
+    private let sortCells = ["По имени (А-Я / A-Z)", "По имени (Я-А / Z-A)", "По фамилии (А-Я / A-Z)", "По фамилии (Я-А / Z-A)"]
     var sortedContacts: [Contact] = []
-    let contactsVC = ContactsViewController.shared
+    private let contactsVC = ContactsViewController.shared
     weak var delegate: SortViewControllerDelegate?
     var sortWay: SortWay = .none
     
@@ -56,7 +56,7 @@ class SortViewController: UIViewController {
         addConstraints()
     }
     
-    func createTable() {
+    private func createTable() {
         tableView.register(SortCell.self, forCellReuseIdentifier: SortCell.identifierSortCell)
         tableView.delegate = self
         tableView.dataSource = self
@@ -95,7 +95,7 @@ class SortViewController: UIViewController {
     }
     
     
-    @objc func applySort() {
+    @objc private func applySort() {
         for row in 0..<tableView.numberOfRows(inSection: 0) {
             guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? SortCell  else { return }
             if row == 0 && cell.radioImageView.image == UIImage(named: "radioOn") {
@@ -120,11 +120,11 @@ class SortViewController: UIViewController {
         }
     }
     
-    @objc func resetSort() {
+    @objc private func resetSort() {
         dismiss(animated: true)
     }
     
-    func sorting(_ contacts: [Contact], by sortWay: SortWay) -> [Contact] {
+    private func sorting(_ contacts: [Contact], by sortWay: SortWay) -> [Contact] {
         var contacts = contacts
         switch sortWay {
         case .nameFromStart:

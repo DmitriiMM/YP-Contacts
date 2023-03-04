@@ -1,6 +1,6 @@
 import UIKit
 
-class FilterCell: UITableViewCell {
+final class FilterCell: UITableViewCell {
     static let identifierFilterCell = "filterCell"
     var isOn = false
     

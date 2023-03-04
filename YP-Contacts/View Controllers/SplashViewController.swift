@@ -1,7 +1,7 @@
 import UIKit
 
-class SplashViewController: UIViewController {
-    let service = ContactsServiceImpl()
+final class SplashViewController: UIViewController {
+    private let service = ContactsServiceImpl()
     
     private lazy var logoImageView: UIImageView = {
         let image = UIImage(named: "logo")

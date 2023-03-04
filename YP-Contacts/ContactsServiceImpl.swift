@@ -7,11 +7,8 @@ protocol ContactsServiceProtocol {
 }
 
 final class ContactsServiceImpl: ContactsServiceProtocol {
-    
-    
     private let store = CNContactStore()
     private let queue = DispatchQueue(label: "contacts-queue")
-//    static let didChangeNotification = Notification.Name(rawValue: "ContactsServiceDidChange")
     
     func requestAccess(completion: @escaping (Bool) -> Void) {
         store.requestAccess(for: .contacts) { isGrant, error in
@@ -54,12 +51,6 @@ final class ContactsServiceImpl: ContactsServiceProtocol {
                         imageData: cnContact.imageData
                     )
                 }
-                
-//                NotificationCenter.default
-//                    .post(
-//                        name: ContactsServiceImpl.didChangeNotification,
-//                        object: self,
-//                        userInfo: ["contacts": ContactsViewController().cellModels])
                 
                 DispatchQueue.main.async {
                     completion(contacts)

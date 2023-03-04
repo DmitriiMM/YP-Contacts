@@ -1,9 +1,9 @@
 import UIKit
 
-class FilterViewController: UIViewController {
+final class FilterViewController: UIViewController {
     private let logos = ["LogoTelegram", "LogoWhatsapp", "LogoViber", "LogoSignal", "LogoThreema", "LogoPhone", "LogoEmail"]
     
-    let tableView = UITableView()
+    private let tableView = UITableView()
     
     private lazy var clearButton: UIButton = {
         let button = UIButton(type: .system)
@@ -36,7 +36,7 @@ class FilterViewController: UIViewController {
         addConstraints()
     }
     
-    func createTable() {
+    private func createTable() {
         tableView.register(FilterCell.self, forCellReuseIdentifier: FilterCell.identifierFilterCell)
         tableView.delegate = self
         tableView.dataSource = self
@@ -74,7 +74,7 @@ class FilterViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    @objc func clearFilters() {
+    @objc private func clearFilters() {
         for row in 0..<tableView.numberOfRows(inSection: 0)
         where (tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell)?.isOn == true {
             guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell  else { return }

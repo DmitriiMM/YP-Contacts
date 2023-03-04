@@ -1,6 +1,6 @@
 import UIKit
 
-class SortCell: UITableViewCell {
+final class SortCell: UITableViewCell {
     static let identifierSortCell = "sortCell"
     
     let sortLabel: UILabel = {

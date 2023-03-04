@@ -1,9 +1,9 @@
 import UIKit
 
-class ContactCell: UITableViewCell {
+final class ContactCell: UITableViewCell {
     static let identifier = "cell"
     
-    let contactImageView: UIImageView = {
+    lazy var contactImageView: UIImageView = {
         let imageView = UIImageView()
         let placeholder = UIImage(systemName: "theatermasks.fill")
         imageView.image = placeholder
@@ -16,7 +16,7 @@ class ContactCell: UITableViewCell {
         return imageView
     }()
     
-    let contactNameLabel: UILabel = {
+    lazy var contactNameLabel: UILabel = {
         let label = UILabel()
         label.text = "First name Last name"
         label.font = UIFont(descriptor: UIFontDescriptor(name: "SFProText-Medium", size: 0), size: 30)
@@ -25,7 +25,7 @@ class ContactCell: UITableViewCell {
         return label
     }()
     
-    let contactPhoneLabel: UILabel = {
+    lazy var contactPhoneLabel: UILabel = {
         let label = UILabel()
         label.text = "000-00-0"
         label.font = UIFont(descriptor: UIFontDescriptor(name: "SFProText-Regular", size: 0), size: 12)
@@ -34,7 +34,7 @@ class ContactCell: UITableViewCell {
         return label
     }()
     
-    let contactIconsStackView: UIStackView = {
+    private lazy var contactIconsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = -4
@@ -55,6 +55,7 @@ class ContactCell: UITableViewCell {
             
             stackView.addArrangedSubview(imageView)
         }
+        
         return stackView
     }()
     
