@@ -2,6 +2,7 @@ import UIKit
 
 final class ContactCell: UITableViewCell {
     static let identifier = "cell"
+    var images = ["Telegram", "Whatsapp", "Viber", "Signal", "Threema", "Phone", "Email"]
     
     lazy var contactImageView: UIImageView = {
         let imageView = UIImageView()
@@ -34,28 +35,12 @@ final class ContactCell: UITableViewCell {
         return label
     }()
     
-    private lazy var contactIconsStackView: UIStackView = {
+    lazy var contactIconsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = -4
         stackView.alignment = .leading
-        let images = ["Telegram", "Whatsapp", "Viber", "Signal", "Threema", "Phone", "Email"]
-        
-        for imageName in images {
-            let imageView = UIImageView(image: UIImage(named: imageName))
-            imageView.layer.cornerRadius = 14
-            imageView.layer.masksToBounds = true
-            imageView.layer.borderWidth = 2
-            imageView.layer.borderColor = UIColor(named: "YP-LightBlack")?.cgColor
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                imageView.widthAnchor.constraint(equalToConstant: 28),
-                imageView.heightAnchor.constraint(equalToConstant: 28)
-            ])
-            
-            stackView.addArrangedSubview(imageView)
-        }
-        
+
         return stackView
     }()
     
@@ -74,6 +59,11 @@ final class ContactCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        for arrangedSubview in contactIconsStackView.arrangedSubviews {
+            contactIconsStackView.removeArrangedSubview(arrangedSubview)
+            arrangedSubview.removeFromSuperview()
+        }
     }
     
     override func layoutSubviews() {
@@ -82,6 +72,20 @@ final class ContactCell: UITableViewCell {
         let margins = UIEdgeInsets(top: 2, left: 0, bottom: 2, right: 0)
         contentView.frame = contentView.frame.inset(by: margins)
         contentView.layer.cornerRadius = 24
+    }
+    
+    func addMiniLogo(to stackView: UIStackView, imageView: UIImageView) {
+        imageView.layer.cornerRadius = 14
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor(named: "YP-LightBlack")?.cgColor
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 28),
+            imageView.heightAnchor.constraint(equalToConstant: 28)
+        ])
+        
+        stackView.addArrangedSubview(imageView)
     }
     
     private func addConstraints() {

@@ -1,9 +1,17 @@
 import UIKit
 
+protocol FilterViewControllerDelegate: AnyObject {
+    func reloadTableView(with filterArray: [String])
+    func returnToAllContacts()
+}
+
 final class FilterViewController: UIViewController {
     private let logos = ["LogoTelegram", "LogoWhatsapp", "LogoViber", "LogoSignal", "LogoThreema", "LogoPhone", "LogoEmail"]
     
     private let tableView = UITableView()
+    var filterArray: [String] = []
+    weak var delegate: FilterViewControllerDelegate?
+    var showAllContacts = false
     
     private lazy var clearButton: UIButton = {
         let button = UIButton(type: .system)
@@ -23,6 +31,7 @@ final class FilterViewController: UIViewController {
         button.tintColor = .white
         button.titleLabel?.font = UIFont(descriptor: UIFontDescriptor(name: "SFProText-Medium", size: 0), size: 16)
         button.layer.cornerRadius = 24
+        button.addTarget(self, action: #selector(applyFilters), for: .touchUpInside)
         
         return button
     }()
@@ -74,13 +83,34 @@ final class FilterViewController: UIViewController {
         view.addSubview(tableView)
     }
     
+    @objc private func applyFilters() {
+        filterArray = []
+        for row in 0..<tableView.numberOfRows(inSection: 0)
+        where (tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell)?.isOn == true {
+            guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell  else { return }
+            
+            guard let filter = cell.logoLabel.text else { return }
+            filterArray.append(filter)
+        }
+        if showAllContacts == false {
+            dismiss(animated: true) {
+                self.delegate?.reloadTableView(with: self.filterArray)
+            }
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
     @objc private func clearFilters() {
+        delegate?.returnToAllContacts()
+        showAllContacts = true
+        applyButton.backgroundColor = UIColor(named: "YP-Blue")
+        
         for row in 0..<tableView.numberOfRows(inSection: 0)
         where (tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell)?.isOn == true {
             guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell  else { return }
             
             cell.resetCheckmark(for: cell)
-            applyButton.backgroundColor = UIColor(named: "YP-Gray")
         }
     }
 }
@@ -143,6 +173,12 @@ extension FilterViewController: UITableViewDataSource {
             filterCell.logoImageView.image = UIImage(named: logos[indexPath.row - 1])
         } else {
             filterCell.logoImageView.removeFromSuperview()
+        }
+        
+        for filter in filterArray {
+            if filter == filterCell.logoLabel.text {
+                filterCell.setCheckmark(for: filterCell)
+            }
         }
         
         return filterCell

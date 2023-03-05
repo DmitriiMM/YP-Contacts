@@ -18,7 +18,6 @@ final class SortViewController: UIViewController {
     private let tableView = UITableView()
     private let sortCells = ["По имени (А-Я / A-Z)", "По имени (Я-А / Z-A)", "По фамилии (А-Я / A-Z)", "По фамилии (Я-А / Z-A)"]
     var sortedContacts: [Contact] = []
-    private let contactsVC = ContactsViewController.shared
     weak var delegate: SortViewControllerDelegate?
     var sortWay: SortWay = .none
     

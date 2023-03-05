@@ -3,10 +3,11 @@ import UIKit
 final class ContactsViewController: UIViewController {
     
     private var tableView = UITableView()
-    private var cellModels: [Contact] = []
+    var cellModels: [Contact] = []
     private let service = ContactsServiceImpl()
-    static let shared = ContactsViewController()
     private var lastSortWay: SortWay = .nameFromStart
+    private var cellModelsMemory: [Contact] = []
+    var filterSettings: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +56,10 @@ final class ContactsViewController: UIViewController {
     }
     
     @objc private func filterButtonTapped() {
-        self.present(FilterViewController(), animated: true)
+        let filterVC = FilterViewController()
+        filterVC.delegate = self
+        filterVC.filterArray = filterSettings
+        present(filterVC, animated: true)
     }
     
     private func createTable() {
@@ -122,6 +126,24 @@ extension ContactsViewController: UITableViewDataSource {
             contactCell.contactImageView.contentMode = .scaleAspectFit
         }
         
+        
+        for name in contact.socialProfiles {
+            if let image = UIImage(named: name) {
+                contactCell.addMiniLogo(to: contactCell.contactIconsStackView,
+                                        imageView: UIImageView(image: image))
+            }
+        }
+        
+        if contact.phoneNumber != " " {
+            contactCell.addMiniLogo(to: contactCell.contactIconsStackView,
+                                    imageView: UIImageView(image: UIImage(named: "Phone")))
+        }
+        
+        if contact.emails != [] {
+            contactCell.addMiniLogo(to: contactCell.contactIconsStackView,
+                                    imageView: UIImageView(image: UIImage(named: "Email")))
+        }
+        
         return contactCell
     }
 }
@@ -136,6 +158,56 @@ extension ContactsViewController: SortViewControllerDelegate {
     }
     
     func reloadTableView() {
+        tableView.reloadData()
+    }
+}
+
+extension ContactsViewController: FilterViewControllerDelegate {
+    func reloadTableView(with filterArray: [String]) {
+        filterSettings = filterArray
+        var filteredContacts: [Contact] = []
+        cellModelsMemory = cellModels
+        
+        if filterArray.contains("Phone") {
+            let phoneFiltered = cellModels.filter { contact in
+                contact.phoneNumber != " "
+            }
+            filteredContacts.append(contentsOf: phoneFiltered)
+        }
+        
+        if filterArray.contains("Email") {
+            let emailFiltered = cellModels.filter { contact in
+                contact.emails != nil && !contact.emails!.isEmpty
+            }
+            filteredContacts.append(contentsOf: emailFiltered)
+        }
+        
+        for filter in filterArray {
+            let socialFiltered = cellModels.filter { contact in
+                contact.socialProfiles.contains(where: { $0 == filter })
+            }
+            filteredContacts.append(contentsOf: socialFiltered)
+        }
+        
+        let uniqueFilteredContacts: [Contact] = filteredContacts.reduce(into: []) { uniqueContacts, contact in
+            if !uniqueContacts.contains(where: { $0 == contact }) {
+                uniqueContacts.append(contact)
+            }
+        }
+        
+        cellModels = []
+        cellModels = uniqueFilteredContacts
+        
+        
+        self.tableView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.cellModels = self.cellModelsMemory
+        }
+    }
+    
+    func returnToAllContacts() {
+        cellModels = cellModelsMemory
         tableView.reloadData()
     }
 }
