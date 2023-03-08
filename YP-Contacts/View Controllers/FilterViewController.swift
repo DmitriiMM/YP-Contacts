@@ -2,7 +2,7 @@ import UIKit
 
 protocol FilterViewControllerDelegate: AnyObject {
     func reloadTableView(with filterArray: [String])
-    func returnToAllContacts()
+    func returnToDefault()
 }
 
 final class FilterViewController: UIViewController {
@@ -102,7 +102,7 @@ final class FilterViewController: UIViewController {
     }
     
     @objc private func clearFilters() {
-        delegate?.returnToAllContacts()
+        delegate?.returnToDefault()
         showAllContacts = true
         applyButton.backgroundColor = UIColor(named: "YP-Blue")
         
@@ -122,14 +122,16 @@ extension FilterViewController: UITableViewDelegate {
         guard let selectedCell = tableView.cellForRow(at: indexPath) as? FilterCell else { return }
         
         if indexPath.row == 0 {
-            selectedCell.setCheckmark(for: selectedCell)
-            
-            for row in 1..<tableView.numberOfRows(inSection: 0)
-            where (tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell)?.isOn == false {
-                guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell  else { return }
-                
-                cell.setCheckmark(for: cell)
-                tableView.deselectRow(at: IndexPath(row: row, section: 0), animated: true)
+            if selectedCell.isOn == true {
+                for row in 0..<tableView.numberOfRows(inSection: 0) {
+                    guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell  else { return }
+                    cell.resetCheckmark(for: cell)
+                }
+            } else {
+                for row in 0..<tableView.numberOfRows(inSection: 0) {
+                    guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? FilterCell  else { return }
+                    cell.setCheckmark(for: cell)
+                }
             }
         } else {
             selectedCell.changeCheckmark()

@@ -2,48 +2,73 @@ import UIKit
 
 final class ContactsViewController: UIViewController {
     
-    private var tableView = UITableView()
     var cellModels: [Contact] = []
     private let service = ContactsServiceImpl()
     private var lastSortWay: SortWay = .nameFromStart
     private var cellModelsMemory: [Contact] = []
     var filterSettings: [String] = []
     
+    private lazy var topBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        
+        return view
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "SFProText-Bold", size: 34)
+        label.text = "Контакты"
+        label.textColor = .white
+        
+        return label
+    }()
+    
+    private lazy var sortButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "sort"), for: .normal)
+        button.addTarget(self, action: #selector(sortButtonTapped), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var filterButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "filter"), for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(ContactCell.self, forCellReuseIdentifier: ContactCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .black
+        tableView.separatorStyle = .none
+        
+        return tableView
+    }()
+    
+    private lazy var emptyTableLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(descriptor: UIFontDescriptor(name: "SFProText-Regular", size: 0), size: 16)
+        label.text = "Таких контактов нет, выберите другие фильтры"
+        label.textColor = .white
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.isHidden = true
+        
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createNavigationBar()
-        createTable()
         loadData()
-    }
-    
-    private  func createNavigationBar() {
-        title = "Контакты"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barStyle = .black
-        
-        let sortBarButton = UIBarButtonItem(
-            image: UIImage(named: "sort"),
-            style: .plain,
-            target: self,
-            action: #selector(sortButtonTapped)
-        )
-        
-        sortBarButton.tintColor = .white
-        
-        let filterBarButton = UIBarButtonItem(
-            image: UIImage(named: "filter"),
-            style: .plain,
-            target: self,
-            action: #selector(filterButtonTapped)
-        )
-        
-        filterBarButton.tintColor = .white
-        
-        navigationItem.rightBarButtonItems = [
-            filterBarButton,
-            sortBarButton
-        ]
+        addSubViews()
+        addConstraints()
     }
     
     @objc private func sortButtonTapped() {
@@ -62,6 +87,55 @@ final class ContactsViewController: UIViewController {
         present(filterVC, animated: true)
     }
     
+    private func addConstraints() {
+        topBar.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        sortButton.translatesAutoresizingMaskIntoConstraints = false
+        filterButton.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        emptyTableLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            topBar.topAnchor.constraint(equalTo: view.topAnchor),
+            topBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topBar.heightAnchor.constraint(equalToConstant: 116),
+            
+            titleLabel.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 87),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            filterButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            filterButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
+            filterButton.heightAnchor.constraint(equalToConstant: 26),
+            filterButton.widthAnchor.constraint(equalToConstant: 26),
+            
+            sortButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            sortButton.trailingAnchor.constraint(equalTo: filterButton.leadingAnchor, constant: -21),
+            sortButton.heightAnchor.constraint(equalToConstant: 26),
+            sortButton.widthAnchor.constraint(equalToConstant: 26),
+            
+            tableView.topAnchor.constraint(equalTo: topBar.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: topBar.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            emptyTableLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyTableLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyTableLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            emptyTableLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    private func addSubViews() {
+        view.addSubview(topBar)
+        view.addSubview(tableView)
+        view.addSubview(emptyTableLabel)
+        topBar.addSubview(titleLabel)
+        topBar.addSubview(sortButton)
+        topBar.addSubview(filterButton)
+    }
+    
     private func createTable() {
         tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.register(ContactCell.self, forCellReuseIdentifier: ContactCell.identifier)
@@ -76,8 +150,17 @@ final class ContactsViewController: UIViewController {
         service.loadContacts { [weak self] contacts in
             guard let self = self else { return }
             self.cellModels = contacts
+            self.cellModelsMemory = contacts
             self.tableView.reloadData()
         }
+    }
+    
+    func returnToDefault() {
+        filterSettings = []
+        cellModels = cellModelsMemory
+        sortButton.setImage(UIImage(named: "sort"), for: .normal)
+        filterButton.setImage(UIImage(named: "filter"), for: .normal)
+        tableView.reloadData()
     }
 }
 
@@ -150,6 +233,8 @@ extension ContactsViewController: UITableViewDataSource {
 
 extension ContactsViewController: SortViewControllerDelegate {
     func updateTableData(with array: [Contact]) {
+        sortButton.setImage(UIImage(named: "sort.fill"), for: .normal)
+        filterButton.setImage(UIImage(named: "filter"), for: .normal)
         cellModels = array
     }
     
@@ -166,7 +251,6 @@ extension ContactsViewController: FilterViewControllerDelegate {
     func reloadTableView(with filterArray: [String]) {
         filterSettings = filterArray
         var filteredContacts: [Contact] = []
-        cellModelsMemory = cellModels
         
         if filterArray.contains("Phone") {
             let phoneFiltered = cellModels.filter { contact in
@@ -198,16 +282,19 @@ extension ContactsViewController: FilterViewControllerDelegate {
         cellModels = []
         cellModels = uniqueFilteredContacts
         
+        if cellModels == [] {
+            emptyTableLabel.isHidden = false
+        } else {
+            emptyTableLabel.isHidden = true
+        }
+        
+        sortButton.setImage(UIImage(named: "sort"), for: .normal)
+        filterButton.setImage(UIImage(named: "filter.fill"), for: .normal)
         
         self.tableView.reloadData()
         
         DispatchQueue.main.async {
             self.cellModels = self.cellModelsMemory
         }
-    }
-    
-    func returnToAllContacts() {
-        cellModels = cellModelsMemory
-        tableView.reloadData()
     }
 }

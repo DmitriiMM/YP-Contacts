@@ -51,7 +51,7 @@ final class SplashViewController: UIViewController {
     
     private func switchToContactsController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        window.rootViewController = UINavigationController(rootViewController: ContactsViewController())
+        window.rootViewController = ContactsViewController()
     }
 }
 

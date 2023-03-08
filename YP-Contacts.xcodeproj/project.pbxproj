@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A32AB97F29AFB394002B727E /* SortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32AB97E29AFB394002B727E /* SortCell.swift */; };
+		A38ECDF929B8FD7A00ABCE77 /* SFProText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A38ECDF829B8FD7A00ABCE77 /* SFProText-Bold.otf */; };
 		A3CE1AC429ABA6AE001A1C89 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE1AC329ABA6AE001A1C89 /* FilterViewController.swift */; };
 		A3CE1AC629ABA707001A1C89 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE1AC529ABA707001A1C89 /* SortViewController.swift */; };
 		A3CE1AC829ABC11E001A1C89 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE1AC729ABC11E001A1C89 /* FilterCell.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		A32AB97E29AFB394002B727E /* SortCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCell.swift; sourceTree = "<group>"; };
+		A38ECDF829B8FD7A00ABCE77 /* SFProText-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.otf"; sourceTree = "<group>"; };
 		A3CE1AC329ABA6AE001A1C89 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A3CE1AC529ABA707001A1C89 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		A3CE1AC729ABC11E001A1C89 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
@@ -51,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A38ECDFC29B91FA500ABCE77 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A38ECDF829B8FD7A00ABCE77 /* SFProText-Bold.otf */,
+				A3D673B629A7D68E001F8B4F /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A3D673A129A7D68C001F8B4F = {
 			isa = PBXGroup;
 			children = (
@@ -70,15 +81,15 @@
 		A3D673AC29A7D68C001F8B4F /* YP-Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				A3D673AD29A7D68C001F8B4F /* AppDelegate.swift */,
-				A3D673AF29A7D68C001F8B4F /* SceneDelegate.swift */,
 				A3D673C129A7DAF9001F8B4F /* Contact.swift */,
 				A3D673C529A7E402001F8B4F /* ContactsServiceImpl.swift */,
 				A3FE7D8129B3DB8200C0EC12 /* View Controllers */,
 				A3FE7D8229B3DBAA00C0EC12 /* Tables Cells */,
-				A3D673B629A7D68E001F8B4F /* Assets.xcassets */,
 				A3D673B829A7D68E001F8B4F /* LaunchScreen.storyboard */,
 				A3D673BB29A7D68E001F8B4F /* Info.plist */,
+				A3D673AD29A7D68C001F8B4F /* AppDelegate.swift */,
+				A3D673AF29A7D68C001F8B4F /* SceneDelegate.swift */,
+				A38ECDFC29B91FA500ABCE77 /* Resources */,
 			);
 			path = "YP-Contacts";
 			sourceTree = "<group>";
@@ -164,6 +175,7 @@
 			files = (
 				A3D673BA29A7D68E001F8B4F /* LaunchScreen.storyboard in Resources */,
 				A3D673B729A7D68E001F8B4F /* Assets.xcassets in Resources */,
+				A38ECDF929B8FD7A00ABCE77 /* SFProText-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@ protocol SortViewControllerDelegate: AnyObject {
     func updateTableData(with array: [Contact])
     func returnBack(lastSortOrder: SortWay)
     func reloadTableView()
+    func returnToDefault()
 }
 
 final class SortViewController: UIViewController {
@@ -120,6 +121,7 @@ final class SortViewController: UIViewController {
     }
     
     @objc private func resetSort() {
+        delegate?.returnToDefault()
         dismiss(animated: true)
     }
     

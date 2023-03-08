@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SFProText-Bold.otf</string>
+	</array>
 	<key>NSContactsUsageDescription</key>
 	<string>Please, grant access to contacts</string>
 	<key>UIApplicationSceneManifest</key>
