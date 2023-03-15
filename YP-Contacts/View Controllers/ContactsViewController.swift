@@ -169,20 +169,49 @@ extension ContactsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAlert = UIAlertController(
+            title: nil,
+            message: "Уверены что хотите удалить контакт?",
+            preferredStyle: .actionSheet
+        )
+        
+        let alertAction = UIAlertAction(title: "Удалить", style: .destructive) { [weak self] _ in
+            self?.cellModels.remove(at: indexPath.row)
+            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        deleteAlert.addAction(alertAction)
+        deleteAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "Удалить"
+        ) { [weak self]  _, _, completion in
+            self?.present(deleteAlert, animated: true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
     
-    // Deleting
-    //
-    //    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-    //        return .delete
-    //    }
-    //
-    //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    //        if editingStyle == .delete {
-    //            myTableView.cellForRow(at: indexPath)
-    //            tableView.deleteRows(at: [indexPath], with: .fade)
-    //        }
-    //    }
-    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        for subview in tableView.subviews {
+            if NSStringFromClass(type(of: subview)) == "_UITableViewCellSwipeContainerView" {
+                for swipeContainerSubview in subview.subviews {
+                    if NSStringFromClass(type(of: swipeContainerSubview)) == "UISwipeActionPullView" {
+                        swipeContainerSubview.backgroundColor = .systemRed
+                        swipeContainerSubview.layer.cornerRadius = 26
+                        swipeContainerSubview.clipsToBounds = true
+                        
+                        for case let button as UIButton in swipeContainerSubview.subviews {
+                            button.layer.cornerRadius = 26
+                            button.clipsToBounds = true
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension ContactsViewController: UITableViewDataSource {

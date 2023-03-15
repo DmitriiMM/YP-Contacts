@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A300D6C729BE22620097B9F9 /* contacts_list.json in Resources */ = {isa = PBXBuildFile; fileRef = A300D6C629BE22620097B9F9 /* contacts_list.json */; };
 		A32AB97F29AFB394002B727E /* SortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32AB97E29AFB394002B727E /* SortCell.swift */; };
 		A38ECDF929B8FD7A00ABCE77 /* SFProText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A38ECDF829B8FD7A00ABCE77 /* SFProText-Bold.otf */; };
 		A3CE1AC429ABA6AE001A1C89 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE1AC329ABA6AE001A1C89 /* FilterViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A300D6C629BE22620097B9F9 /* contacts_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contacts_list.json; sourceTree = "<group>"; };
 		A32AB97E29AFB394002B727E /* SortCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCell.swift; sourceTree = "<group>"; };
 		A38ECDF829B8FD7A00ABCE77 /* SFProText-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.otf"; sourceTree = "<group>"; };
 		A3CE1AC329ABA6AE001A1C89 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				A38ECDF829B8FD7A00ABCE77 /* SFProText-Bold.otf */,
 				A3D673B629A7D68E001F8B4F /* Assets.xcassets */,
+				A300D6C629BE22620097B9F9 /* contacts_list.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A300D6C729BE22620097B9F9 /* contacts_list.json in Resources */,
 				A3D673BA29A7D68E001F8B4F /* LaunchScreen.storyboard in Resources */,
 				A3D673B729A7D68E001F8B4F /* Assets.xcassets in Resources */,
 				A38ECDF929B8FD7A00ABCE77 /* SFProText-Bold.otf in Resources */,
