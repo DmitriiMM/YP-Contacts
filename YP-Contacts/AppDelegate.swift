@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  YP-Contacts
-//
-//  Created by Дмитрий Мартынов on 23.02.2023.
-//
-
 import UIKit
 
 @main

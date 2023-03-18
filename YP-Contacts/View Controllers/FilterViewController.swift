@@ -6,7 +6,7 @@ protocol FilterViewControllerDelegate: AnyObject {
 }
 
 final class FilterViewController: UIViewController {
-    private let logos = ["LogoTelegram", "LogoWhatsapp", "LogoViber", "LogoSignal", "LogoThreema", "LogoPhone", "LogoEmail"]
+    private let logos = ["LogoTelegram", "LogoWhatsApp", "LogoViber", "LogoSignal", "LogoThreema", "LogoPhone", "LogoEmail"]
     
     private let tableView = UITableView()
     var filterArray: [String] = []

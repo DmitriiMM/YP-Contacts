@@ -1,0 +1,259 @@
+{
+    "contacts": [
+        {
+            "firstname": "Иван",
+            "lastname": "Иванов",
+            "phone_number": "+7 (999) 123-45-67",
+            "photo_url": "https://source.unsplash.com/random/100x100",
+            "messenger": {
+                "telegram": true,
+                "whatsapp": true,
+                "viber": false,
+                "signal": true,
+                "threema": true,
+                "email": true
+            },
+            "email": "ivanov@gmail.com"
+        },
+        {
+            "firstname": "Петр",
+            "lastname": "Петров",
+            "phone_number": "+7 (999) 234-56-78",
+            "photo_url": null,
+            "messenger": {
+                "telegram": false,
+                "whatsapp": true,
+                "viber": true,
+                "signal": false,
+                "threema": false,
+                "email": true
+            },
+            "email": "petrov@mail.com"
+        },
+        {
+            "firstname": "Анна",
+            "lastname": "Сидорова",
+            "phone_number": "+7 (999) 345-67-89",
+            "photo_url": "https://source.unsplash.com/random/100x100",
+            "messenger": {
+                "telegram": false,
+                "whatsapp": false,
+                "viber": true,
+                "signal": false,
+                "threema": true,
+                "email": true
+            },
+            "email": "sidorova@yandex.com"
+        },
+        {
+            "firstname": "Сергей",
+            "lastname": "Сергеев",
+            "phone_number": "+7 (999) 456-78-90",
+            "photo_url": null,
+            "messenger": {
+                "telegram": true,
+                "whatsapp": true,
+                "viber": true,
+                "signal": true,
+                "threema": false,
+                "email": true
+            },
+            "email": "sergeev@gmail.com"
+        },
+        {
+            "firstname": "Ольга",
+            "lastname": "Орлова",
+            "phone_number": "+7 (999) 567-89-01",
+            "photo_url": "https://source.unsplash.com/random/100x100",
+            "messenger": {
+                "telegram": true,
+                "whatsapp": true,
+                "viber": true,
+                "signal": true,
+                "threema": true,
+                "email": true
+            },
+            "email": "orlova@mail.com"
+        },
+        {
+            "firstname": "Мария",
+            "lastname": "Смирнова",
+            "phone_number": "+7 (999) 789-01-23",
+            "photo_url": "https://source.unsplash.com/random/100x100",
+            "messenger": {
+                "telegram": true,
+                "whatsapp": false,
+                "viber": true,
+                "signal": false,
+                "threema": true,
+                "email": true
+            },
+            "email": "smirnova@gmail.com"
+        },
+        {
+            "firstname": "Алексей",
+            "lastname": "Алексеев",
+            "phone_number": "+7 (999) 890-12-34",
+            "photo_url": null,
+            "messenger": {
+                "telegram": true,
+                "whatsapp": true,
+                "viber": false,
+                "signal": true,
+                "threema": false,
+                "email": true
+            },
+            "email": "alexeev@yandex.com"
+        },
+        {
+            "firstname": "Екатерина",
+            "lastname": "Ефимова",
+            "phone_number": "+7 (999) 901-23-45",
+            "photo_url": "https://source.unsplash.com/random/100x100",
+            "messenger": {
+                "telegram": false,
+                "whatsapp": true,
+                "viber": false,
+                "signal": true,
+                "threema": true,
+                "email": true
+            },
+            "email": "efimova@mail.com"
+        },
+        {
+            "firstname": "Михаил",
+            "lastname": "Михайлов",
+            "phone_number": "+7 (999) 012-34-56",
+            "photo_url": null,
+            "messenger": {
+                "telegram": false,
+                "whatsapp": true,
+                "viber": true,
+                "signal": true,
+                "threema": false,
+                "email": true
+            },
+            "email": "mikhailov@gmail.com"
+        },
+        {
+            "firstname": "Надежда",
+            "lastname": "Николаева",
+            "phone_number": "+7 (999) 123-45-67",
+            "photo_url": "https://source.unsplash.com/random/100x100",
+            "messenger": {
+                "telegram": true,
+                "whatsapp": true,
+                "viber": true,
+                "signal": true,
+                "threema": false,
+                "email": true
+            },
+            "email": "nikolaeva@yandex.com"
+        },
+        {
+            "firstname": "Александра",
+            "lastname": "Федорова",
+            "phone_number": "+79071234567",
+            "photo_url": "https://source.unsplash.com/featured/?portrait",
+            "messenger": {
+                "telegram": true,
+                "whatsapp": true,
+                "viber": false,
+                "signal": false,
+                "threema": false,
+                "email": true
+            },
+            "email": "fedorova@gmail.com"
+        },
+        {
+            "firstname": "Денис",
+            "lastname": "Коваленко",
+            "phone_number": "+79081234567",
+            "photo_url": null,
+            "messenger": {
+                "telegram": false,
+                "whatsapp": true,
+                "viber": true,
+                "signal": false,
+                "threema": false,
+                "email": false
+            },
+            "email": null
+        },
+{
+      "firstname": "Кристина",
+      "lastname": "Макарова",
+      "phone_number": "+79091234567",
+      "photo_url": "https://source.unsplash.com/featured/?woman",
+      "messenger": {
+        "telegram": true,
+        "whatsapp": false,
+        "viber": false,
+        "signal": false,
+        "threema": false,
+        "email": true
+      },
+      "email": "makarova@mail.com"
+    },
+    {
+      "firstname": "Максим",
+      "lastname": "Захаров",
+      "phone_number": "+79101234567",
+      "photo_url": null,
+      "messenger": {
+        "telegram": true,
+        "whatsapp": false,
+        "viber": false,
+        "signal": false,
+        "threema": false,
+        "email": false
+      },
+      "email": null
+    },
+    {
+      "firstname": "Светлана",
+      "lastname": "Королева",
+      "phone_number": "+79111234567",
+      "photo_url": "https://source.unsplash.com/featured/?girl",
+      "messenger": {
+        "telegram": false,
+        "whatsapp": true,
+        "viber": true,
+        "signal": false,
+        "threema": false,
+        "email": false
+      },
+      "email": null
+    },
+    {
+      "firstname": "Николай",
+      "lastname": "Дмитриев",
+      "phone_number": "+79121234567",
+      "photo_url": null,
+      "messenger": {
+        "telegram": true,
+        "whatsapp": false,
+        "viber": false,
+        "signal": true,
+        "threema": false,
+        "email": true
+      },
+      "email": "dmitriev@mail.com"
+    },
+    {
+      "firstname": "Евгения",
+      "lastname": "Михайлова",
+      "phone_number": "+79131234567",
+      "photo_url": "https://source.unsplash.com/featured/?woman",
+      "messenger": {
+        "telegram": false,
+        "whatsapp": false,
+        "viber": true,
+        "signal": false,
+        "threema": false,
+        "email": true
+      },
+      "email": "mikhailova@gmail.com"
+    }
+  ]
+}

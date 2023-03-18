@@ -66,7 +66,8 @@ final class ContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadData()
+        loadLocalData()
+//        loadData()
         addSubViews()
         addConstraints()
     }
@@ -155,6 +156,13 @@ final class ContactsViewController: UIViewController {
         }
     }
     
+    func loadLocalData() {
+        JSONContactsService().parseContactsFromLocalData { contacts in
+            self.cellModels = contacts
+            self.tableView.reloadData()
+        }
+    }
+    
     func returnToDefault() {
         filterSettings = []
         cellModels = cellModelsMemory
@@ -200,11 +208,13 @@ extension ContactsViewController: UITableViewDelegate {
                 for swipeContainerSubview in subview.subviews {
                     if NSStringFromClass(type(of: swipeContainerSubview)) == "UISwipeActionPullView" {
                         swipeContainerSubview.backgroundColor = .systemRed
-                        swipeContainerSubview.layer.cornerRadius = 26
+                        swipeContainerSubview.layer.cornerRadius = 24
                         swipeContainerSubview.clipsToBounds = true
+                        swipeContainerSubview.frame.size.height = 116
+                        swipeContainerSubview.frame.origin.y = 2
                         
                         for case let button as UIButton in swipeContainerSubview.subviews {
-                            button.layer.cornerRadius = 26
+                            button.layer.cornerRadius = 24
                             button.clipsToBounds = true
                         }
                     }

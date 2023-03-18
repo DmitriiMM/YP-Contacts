@@ -6,8 +6,6 @@
 	<array>
 		<string>SFProText-Bold.otf</string>
 	</array>
-	<key>NSContactsUsageDescription</key>
-	<string>Please, grant access to contacts</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

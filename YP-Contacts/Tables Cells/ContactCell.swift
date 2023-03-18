@@ -19,6 +19,7 @@ final class ContactCell: UITableViewCell {
     
     lazy var contactNameLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
         label.text = "First name Last name"
         label.font = UIFont(descriptor: UIFontDescriptor(name: "SFProText-Medium", size: 0), size: 30)
         label.textColor = .white
